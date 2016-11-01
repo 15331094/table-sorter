@@ -202,8 +202,8 @@ $(document).ready(function() {
     //点击增加新的行
     $("#Button").click(function() {
         //alert("lala");<input type='text' value='2007-11-15'/>
-        $("#todo tbody").append($("<tr><td><input type='text' value='   '/></td><td><input type='text' value='   '/></td><td><input type='text' value='   '/></td></tr>"));
-        $("#staff tbody").append($("<tr><td><input type='text' value='   '/></td><td><input type='text' value='   '/></td><td><input type='text' value='   '/></td></tr>"));
+        $("#todo tbody").append($("<tr><td><input type='text' value=''/></td><td><input type='text' value=''/></td><td><input type='text' value=''/></td></tr>"));
+        $("#staff tbody").append($("<tr><td><input type='text' value=''/></td><td><input type='text' value=''/></td><td><input type='text' value=''/></td></tr>"));
         rowNum++;
         if(rowNum % 2 == 0) {
             var num =  rowNum - 1;
