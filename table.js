@@ -1,11 +1,12 @@
 $(document).ready(function() {
     //6个数组存储两个表格每列的数据
-    var what = new Array(3);
-    var when = new Array(3);
-    var location = new Array(3);
-    var firstName = new Array(3);
-    var lastName = new Array(3);
-    var checkIn = new Array(3);
+    var what = new Array(50);
+    var when = new Array(50);
+    var location = new Array(50);
+    var firstName = new Array(50);
+    var lastName = new Array(50);
+    var checkIn = new Array(50);
+    var rowNum = 3;
     //记录表头被点击是第几次，up表示点击的第一次，down第二次
     var what_times = "up", when_times = "up", location_times = "up";
     var fName_times = "up", lName_times = "up", check_times = "up";
@@ -25,6 +26,8 @@ $(document).ready(function() {
         $("#todo thead tr:eq(0) th:eq(" + i + ")").append($("<div></div>"));
         $("#staff thead tr:eq(0) th:eq(" + i + ")").append($("<div></div>"));        
     }
+
+
 /*
     //给每一列数据备份
     var whatStandard = [].concat(what);
@@ -32,7 +35,8 @@ $(document).ready(function() {
     var locationStandard = [].concat(location);
     var firstNameStandard = [].concat(firstName);
     var lastNameStandard = [].concat(lastName);
-    var checkInStandard = [].concat(checkIn);*/
+    var checkInStandard = [].concat(checkIn);
+    */
     //对应交换数组的第j位和j + 1位，exchange()函数在sort函数中被调用
     function exchange(table, j) {
         if(table == 0) {
@@ -64,8 +68,8 @@ $(document).ready(function() {
     }
 
     function reget() {
-        for(var i = 0; i < 3; i++) {
-        //把每一列的数据放进数组中
+        for(var i = 0; i < rowNum; i++) {
+        //把每一行的数据放进数组中
             what[i] = $("#todo tbody tr:eq(" + i + ") td:eq(0) input").val();
             when[i] = $("#todo tbody tr:eq(" + i + ") td:eq(1) input").val();
             location[i] = $("#todo tbody tr:eq(" + i + ") td:eq(2) input").val();
@@ -117,8 +121,8 @@ $(document).ready(function() {
         if(th == 5) temp = [].concat(checkIn);
 
         if(order == "increase") {
-            for(var i = 0; i < 3; i++) {
-                for(var j = 0; j < 2 - i; j++) {
+            for(var i = 0; i < rowNum; i++) {
+                for(var j = 0; j < rowNum - i - 1; j++) {
                     if(temp[j] > temp[j + 1]) {
                         var t = temp[j];
                         temp[j] = temp[j + 1];
@@ -129,8 +133,8 @@ $(document).ready(function() {
             }            
         }
         else if(order == "decrease") {
-            for(var i = 0; i < 2; i++) {
-                for(var j = 0; j < 2 - i; j++) {
+            for(var i = 0; i < rowNum; i++) {
+                for(var j = 0; j < rowNum - i - 1; j++) {
                     if(temp[j] < temp[j + 1]) {
                         var t = temp[j];
                         temp[j] = temp[j + 1];
@@ -145,7 +149,7 @@ $(document).ready(function() {
     }
     //在进行排序之后reset()函数把数组的数据重新放回表格中
     function reset() {
-        for(var i = 0; i < 3; i++) {
+        for(var i = 0; i < rowNum; i++) {
             $("#todo tbody tr:eq(" + i + ") td:eq(0) input").val(what[i]);
             $("#todo tbody tr:eq(" + i + ") td:eq(1) input").val(when[i]);
             $("#todo tbody tr:eq(" + i + ") td:eq(2) input").val(location[i]);
@@ -195,6 +199,19 @@ $(document).ready(function() {
             }
         }
     }
+    //点击增加新的行
+    $("#Button").click(function() {
+        //alert("lala");<input type='text' value='2007-11-15'/>
+        $("#todo tbody").append($("<tr><td><input type='text' value='new'/></td><td><input type='text' value='new'/></td><td><input type='text' value='new'/></td></tr>"));
+        $("#staff tbody").append($("<tr><td><input type='text' value='new'/></td><td><input type='text' value='new'/></td><td><input type='text' value='new'/></td></tr>"));
+        rowNum++;
+        if(rowNum % 2 == 0) {
+            var num =  rowNum - 1;
+            $("#todo tbody tr:eq(" + num + ")").css("background-color", "gray");
+            $("#staff tbody tr:eq(" + num + ")").css("background-color", "gray");
+        }
+    });
+
 //按照what来进行排序
     $("#todo thead tr:eq(0) th:eq(0)").click(function() {
        // alert("what");
