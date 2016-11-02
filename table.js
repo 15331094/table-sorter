@@ -147,6 +147,7 @@ $(document).ready(function() {
         //alert(when[0] + " " + when[1] + " " + when[2]);
         reset();
     }
+    /*
     //在进行排序之后reset()函数把数组的数据重新放回表格中
     function reset() {
         for(var i = 0; i < rowNum; i++) {
@@ -158,7 +159,25 @@ $(document).ready(function() {
             $("#staff tbody tr:eq(" + i + ") td:eq(1) input").val(lastName[i]);
             $("#staff tbody tr:eq(" + i + ") td:eq(2) input").val(checkIn[i]);  
         }
+    }*/
+
+    function reset() {
+        for(var i = 0, j = 0; i < rowNum; j++) {
+            if(what[j] == when[j] && when[j] == location[j] && location[j] == "") continue;
+            $("#todo tbody tr:eq(" + i + ") td:eq(0) input").val(what[j]);
+            $("#todo tbody tr:eq(" + i + ") td:eq(1) input").val(when[j]);
+            $("#todo tbody tr:eq(" + i + ") td:eq(2) input").val(location[j]);
+            i++;
+        }
+        for(var i = 0, j = 0; i < rowNum; j++) {
+            if(firstName[j] == lastName[j] && lastName[j] == checkIn[j] && checkIn[j] == "") continue;
+            $("#staff tbody tr:eq(" + i + ") td:eq(0) input").val(firstName[j]);
+            $("#staff tbody tr:eq(" + i + ") td:eq(1) input").val(lastName[j]);
+            $("#staff tbody tr:eq(" + i + ") td:eq(2) input").val(checkIn[j]);
+            i++;            
+        }
     }
+
     /*change()函数在点击表头和排序完成之后对表头的样式进行修改，
     显示三角形*/
     function change(tableId, th, order) {
