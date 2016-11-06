@@ -46,4 +46,12 @@ td {
     z-index: 0;
 }
 
+th input {
+	background-color: blue;
+	border: none;
+}
 
+tr input {
+	background-color: transparent;
+	border: none;
+}
