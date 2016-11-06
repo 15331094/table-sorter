@@ -10,33 +10,12 @@ $(document).ready(function() {
     //记录表头被点击是第几次，up表示点击的第一次，down第二次
     var what_times = "up", when_times = "up", location_times = "up";
     var fName_times = "up", lName_times = "up", check_times = "up";
-    /*
-    for(var i = 0; i < 3; i++) {
-        //把每一列的数据放进数组中
-        what[i] = $("#todo tbody tr:eq(" + i + ") td:eq(0) input").val();
-        when[i] = $("#todo tbody tr:eq(" + i + ") td:eq(1) input").val();
-        location[i] = $("#todo tbody tr:eq(" + i + ") td:eq(2) input").val();
-        firstName[i] = $("#staff tbody tr:eq(" + i + ") td:eq(0) input").val();
-        lastName[i] = $("#staff tbody tr:eq(" + i + ") td:eq(1) input").val();
-        checkIn[i] = $("#staff tbody tr:eq(" + i + ") td:eq(2) input").val();        
-    }*/
 
     for(var i = 0; i < 3; i++) {
         //给每一个表头末尾增加一个div三角形
         $("#todo thead tr:eq(0) th:eq(" + i + ")").append($("<div></div>"));
         $("#staff thead tr:eq(0) th:eq(" + i + ")").append($("<div></div>"));        
     }
-
-
-/*
-    //给每一列数据备份
-    var whatStandard = [].concat(what);
-    var whenStandard = [].concat(when);
-    var locationStandard = [].concat(location);
-    var firstNameStandard = [].concat(firstName);
-    var lastNameStandard = [].concat(lastName);
-    var checkInStandard = [].concat(checkIn);
-    */
     //对应交换数组的第j位和j + 1位，exchange()函数在sort函数中被调用
     function exchange(table, j) {
         if(table == 0) {
@@ -102,16 +81,7 @@ $(document).ready(function() {
         firstName = [].concat(firstNameStandard);
         lastName = [].concat(lastNameStandard);
         checkIn = [].concat(checkInStandard);
-/*
-        for(var i = 0; i < 3; i++) {
-        //把每一列的数据放进数组中
-            what[i] = $("#todo tbody tr:eq(" + i + ") td:eq(0) input").val();
-            when[i] = $("#todo tbody tr:eq(" + i + ") td:eq(1) input").val();
-            location[i] = $("#todo tbody tr:eq(" + i + ") td:eq(2) input").val();
-            firstName[i] = $("#staff tbody tr:eq(" + i + ") td:eq(0) input").val();
-            lastName[i] = $("#staff tbody tr:eq(" + i + ") td:eq(1) input").val();
-            checkIn[i] = $("#staff tbody tr:eq(" + i + ") td:eq(2) input").val();             
-        }*/
+
         var temp;
         if(th == 0) temp = [].concat(what);
         if(th == 1) temp = [].concat(when);
@@ -147,20 +117,7 @@ $(document).ready(function() {
         //alert(when[0] + " " + when[1] + " " + when[2]);
         reset();
     }
-    /*
-    //在进行排序之后reset()函数把数组的数据重新放回表格中
-    function reset() {
-        for(var i = 0; i < rowNum; i++) {
-            $("#todo tbody tr:eq(" + i + ") td:eq(0) input").val(what[i]);
-            $("#todo tbody tr:eq(" + i + ") td:eq(1) input").val(when[i]);
-            $("#todo tbody tr:eq(" + i + ") td:eq(2) input").val(location[i]);
-
-            $("#staff tbody tr:eq(" + i + ") td:eq(0) input").val(firstName[i]);
-            $("#staff tbody tr:eq(" + i + ") td:eq(1) input").val(lastName[i]);
-            $("#staff tbody tr:eq(" + i + ") td:eq(2) input").val(checkIn[i]);  
-        }
-    }*/
-
+    //把每一列的数据放到数组里面
     function reset() {
         for(var i = 0, j = 0; i < rowNum; j++) {
             if(what[j] == when[j] && when[j] == location[j] && location[j] == "") continue;
@@ -226,8 +183,8 @@ $(document).ready(function() {
         rowNum++;
         if(rowNum % 2 == 0) {
             var num =  rowNum - 1;
-            $("#todo tbody tr:eq(" + num + ")").css("background-color", "gray");
-            $("#staff tbody tr:eq(" + num + ")").css("background-color", "gray");
+            $("#todo tbody tr:eq(" + num + ")").addClass("alternate");
+            $("#staff tbody tr:eq(" + num + ")").addClass("alternate");
         }
     });
 
